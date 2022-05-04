@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.apache.tomcat.util.http.parser.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Producer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,57 +23,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zensar.firstspringbootapp.entity.Product;
+import com.zensar.firstspringbootapp.service.ProductService;
 
 @RestController
 @RequestMapping("/products/api/v1")
 public class ProductController {
 
-	List<Product> products = new ArrayList<>();
+	@Autowired
+	private ProductService service;
+	
 
 	public ProductController() {
-		products.add(new Product(1, "Car", 500));
-		products.add(new Product(2, "Cycle", 600));
-		products.add(new Product(3, "Bike", 700));
+		
 	}
 
 	// @RequestMapping(value = "/products")
 	@GetMapping()
 	public List<Product> getAllProducts() {
-		return products;
+		return service.getAllProducts();
 	}
 
 	@GetMapping("/{productId}")
-	public Product getProduct(@PathVariable("productId") int productId) {
-		for (Product product : products) {
-			if (product.getProductId() == productId) {
-				return product;
-			}
-
-		}
-		return null;
+	public Product getProduct(@PathVariable("productId")int  productId) {
+		return service.getProduct(productId);
 	}
 
 	@PostMapping
 	public void insertProduct(@RequestBody Product product) {
-		products.add(product);
+		service.insertProduct(product);
 
 	}
 
 	@DeleteMapping("/{productId}")
 	public void deleteProduct(@PathVariable("productId") int productId) {
-		for (int i = 0; i < products.size(); i++) {
-			Product product = products.get(i);
-			if (product.getProductId() == productId) {
-				products.remove(product);
-
-			}
-
-		}
+		service.deleteProduct(productId);
 	}
 
 	@PutMapping
 	public void updateProduct(int productId, Product product) {
-		System.out.println("public void updateProduct(int productId, Product product)");
+		service.updateProduct(productId, product);
 
 	}
 
