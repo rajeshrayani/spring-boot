@@ -20,30 +20,30 @@ public class ProductServiceImpl implements ProductService{
 	private ProductRepository repository;
 	
 
-	public List<Product> getAllProducts() {
-		return repository.getAllProducts();
+	public Iterable<Product> getAllProducts() {
+		return repository.findAll();
 	}
 
 	
 	public Product getProduct (int productId) {
-		return repository.getProduct(productId);
+		return repository.findById(productId).get();
 		
 	}
 
 	
-	public void insertProduct (Product product) {
-		repository.insertProduct(product);
+	public Product insertProduct (Product product) {
+		return repository.save(product);
 
 	}
 
 	
 	public void deleteProduct(int productId) {
-		repository.deleteProduct(productId);
+		repository.deleteById(productId);
 	}
 
 	
 	public void updateProduct(int productId, Product product) {
-		repository.updateProduct(productId, product);
+		repository.save(product);
 	}
 
 }

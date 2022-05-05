@@ -39,7 +39,7 @@ public class ProductController {
 
 	// @RequestMapping(value = "/products")
 	@GetMapping()
-	public List<Product> getAllProducts() {
+	public Iterable<Product> getAllProducts() {
 		return service.getAllProducts();
 	}
 
