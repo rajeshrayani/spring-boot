@@ -1,7 +1,5 @@
 package com.zensar.firstspringbootapp.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 
 import com.zensar.firstspringbootapp.entity.Product;
