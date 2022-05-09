@@ -16,6 +16,7 @@ import com.zensar.firstspringbootapp.service.ProductService;
 @RestController
 @RequestMapping("/products/api/v1")
 public class ProductController {
+	// http://localhost:5000/pmanagement/products/api/v1
 
 	@Autowired
 	private ProductService service;

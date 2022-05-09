@@ -9,7 +9,12 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class FirstSpringBootAppApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FirstSpringBootAppApplication.class, args);
+		// SpringApplication.run(FirstSpringBootAppApplication.class, args);
+		new SpringApplicationBuilder(FirstSpringBootAppApplication.class)
+		.properties("spring.config.name:application")
+		.build()
+		.run(args);
+		
 	}
 
 	@Override
